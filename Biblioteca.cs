@@ -41,6 +41,13 @@ namespace csharp_biblioteca_db
             }
         }
 
+        public void AggiungiLibro(long lCodice, string sTitolo, int iAnno, string sSettore, int iNumPagine, string sScaffale, List<Autore> lListaAutori)
+        {
+            Libro MioLibro = new Libro(lCodice, sTitolo, iAnno, sSettore, iNumPagine, sScaffale);
+            MioLibro.Stato = Stato.Disponibile;
+            db.libroAdd(MioLibro, lListaAutori);
+        }
+
         public int GestisciOperazioneBiblioteca(int iCodiceOperazione)
         {
             List<Documento> lResult;
