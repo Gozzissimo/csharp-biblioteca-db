@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Data.SqlClient;
 
 namespace csharp_biblioteca_db // Note: actual namespace depends on the project name.
@@ -7,41 +8,12 @@ namespace csharp_biblioteca_db // Note: actual namespace depends on the project 
     {
         static void Main(string[] args)
         {
-            string stringaDiConnessione =
-            "Data Source=localhost;Initial Catalog=biblioteca;Integrated Security=True;Pooling=False";
-
-            //using (SqlConnection conn = new SqlConnection(stringaDiConnessione))
-            //{
-            //    conn.Open();
-            //}
-
-            //using (SqlCommand insert = new
-            //    SqlCommand(@"insert into clienti (Id, nome, cognome, codice_cliente)
-            //    values (1, 'il nome della persona', 'il cognome della persona', 1817263)", conn))
-            //{
-            //    var numrows = insert.ExecuteNonQuery();
-            //    Console.WriteLine(numrows);
-            //}
-            //using (SqlCommand query = new SqlCommand("select * from clienti", conn))
-            //{
-            //    using (SqlDataReader reader = query.ExecuteReader())
-            //    {
-            //        Console.WriteLine(reader.FieldCount);
-            //        while (reader.Read())
-            //        {
-            //            for (int i = 0; i < reader.FieldCount; ++i)
-            //                Console.Write("{0}, ", reader[i]);
-            //            Console.WriteLine();
-            //        }
-            //    }
-            //}
-
 
             Biblioteca b = new Biblioteca("Civica");
 
-            b.AggiungiScaffale("s001");
+            /*b.AggiungiScaffale("s001");
             b.AggiungiScaffale("s002");
-            b.AggiungiScaffale("s003");
+            b.AggiungiScaffale("s003");*/
 
             Console.WriteLine("Lista operazione: ");
             Console.WriteLine("\t1 : cercaLibro per Autore ");
@@ -49,13 +21,13 @@ namespace csharp_biblioteca_db // Note: actual namespace depends on the project 
 
             string sAppo = Console.ReadLine();
 
-            while (sAppo != null)
-
-            {
-                if (sAppo == "1") b.GestisciOperazioneBiblioteca(1);
-            }
+            /* while (sAppo != null)
+             {
+                 if (sAppo == "1") b.GestisciOperazioneBiblioteca(1); 
+             }*/
 
             /*
+            Data Source=localhost;Initial Catalog=Biblioteca;Integrated Security=True;Pooling=False
             #region "Libro 1"
             Libro l1 = new Libro("ISBN1", "Titolo 1", 2009, "Storia", 220);
             Autore a1 = new Autore("Nome 1", "Cognome 1");

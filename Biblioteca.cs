@@ -16,16 +16,29 @@ namespace csharp_biblioteca_db
         public Biblioteca(string Nome)
         {
             this.Nome = Nome;
-            this.ScaffaliBiblioteca = new List<Scaffale>();
+            ScaffaliBiblioteca = new List<Scaffale>();
 
+            //Recuperare l'elenco degli scaffali
+            List<string> elencoScaffali = db.scaffaliGet();
+            elencoScaffali.ForEach(item =>
+            {
+                Scaffale nuovo = new Scaffale(item);
+                ScaffaliBiblioteca.Add(nuovo);
+            });
+
+            //Recuperare tutti i dati permanenti
         }
 
-        public void AggiungiScaffale(string nomescaffale)
+        public void AggiungiScaffale(string nomescaffale, bool addToDb=false)
 
         {
             Scaffale nuovo = new Scaffale(nomescaffale);
 
-            this.ScaffaliBiblioteca.Add(nuovo);
+            ScaffaliBiblioteca.Add(nuovo);
+            if (addToDb)
+            {
+                db.scaffaleAdd(nuovo.Numero);
+            }
         }
 
         public int GestisciOperazioneBiblioteca(int iCodiceOperazione)
