@@ -229,9 +229,9 @@ namespace csharp_biblioteca_db
             return ls;
         }
         //nel caso ci siano più attributi, allora potete utilizzare le tuple
-        internal static List<Tuple<int, string, string, string, string, string>> documentiGet()
+        internal static List<Tuple<long, string, string, string, string, string>> documentiGet()
         {
-            var ld = new List<Tuple<int, string, string, string, string, string>>();
+            var ld = new List<Tuple<long, string, string, string, string, string>>();
             var conn = Connect();
             if (conn == null)
                 throw new Exception("Unable to connect to the dabatase");
@@ -242,8 +242,8 @@ namespace csharp_biblioteca_db
                 {
                     while (reader.Read())
                     {
-                        var data = new Tuple<Int32, string, string, string, string, string>(
-                            reader.GetInt32(0),
+                        var data = new Tuple<Int64, string, string, string, string, string>(
+                            reader.GetInt64(0),
                             reader.GetString(1),
                             reader.GetString(2),
                             reader.GetString(3),
@@ -254,6 +254,16 @@ namespace csharp_biblioteca_db
                 }
             }
             conn.Close();
+            foreach (var utente in ld)
+            {
+                Console.WriteLine("Documento:\nCodice: {0}\nTitolo: {1}\nSettore: {2}\nStato: {3}\nTipo: {4}\nScaffale: {5}\n",
+                    utente.Item1,
+                    utente.Item2,
+                    utente.Item3,
+                    utente.Item4,
+                    utente.Item5,
+                    utente.Item6);
+            }
             return ld;
         }
     }

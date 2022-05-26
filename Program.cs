@@ -17,6 +17,7 @@ namespace csharp_biblioteca_db // Note: actual namespace depends on the project 
             b.AggiungiLibro(db.GetUniqueId(), "La grande cavalcata", 1960, "Avventura", 200, "S002", lAutoriLibro); ;
 
 
+
             /*b.AggiungiScaffale("s001");
             b.AggiungiScaffale("s002");
             b.AggiungiScaffale("s003");*/
