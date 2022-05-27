@@ -1,4 +1,10 @@
-﻿
+﻿/*
+    Aggiungere un metodo di creazione di un evento di presentazione di un libro
+    A partire dal nome del libro cercare gli autori,
+    inviare email agli autori e inviare email a un gruppo di utenti classificato come interessato
+    a partecipare alle presentazioni(quindi una tabella utente)
+*/
+
 using System;
 using System.Data.SqlClient;
 
@@ -8,13 +14,44 @@ namespace csharp_biblioteca_db // Note: actual namespace depends on the project 
     {
         static void Main(string[] args)
         {
-
             Biblioteca b = new Biblioteca("Civica");
-
             List<Autore> lAutoriLibro = new List<Autore>();
-            Autore AutoreMioLibro = new Autore("Gianni", "Rivera", "gianni@gmail.com");
-            lAutoriLibro.Add(AutoreMioLibro);
-            b.AggiungiLibro(db.GetUniqueId(), "La grande cavalcata", 1960, "Avventura", 200, "S002", lAutoriLibro); ;
+
+            StreamReader reader = new StreamReader("elenco.txt");
+            string linea;
+            while ((linea = reader.ReadLine()) != null)
+            {
+                var vett = linea.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                string s = vett[0];
+                var cn = s.Split(new char[] {' '});
+                string nome = cn[0];
+                string cognome = "n.a.";
+                try
+                {
+                    cognome = s.Substring(cn[0].Length + 1);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                string titolo = vett[1];
+                Console.WriteLine("Nome: {0}, Cognome: {1}, Titolo: {2}", nome, cognome, titolo);
+                string mail = nome + "@" + cognome + ".it";
+                
+                Autore AutoreMioLibro = new Autore(nome, cognome, mail);
+                lAutoriLibro.Add(AutoreMioLibro);
+                b.AggiungiLibro(db.GetUniqueId(), titolo, 0001, "Vario", 452, "S002", lAutoriLibro);
+            }
+            Environment.Exit(-1);
+            
+            //Autore AutoreMioLibro2 = new Autore("Gianni", "Rivera", "gianni@gmail.com");
+            //lAutoriLibro.Add(AutoreMioLibro2);
+            //b.AggiungiLibro(db.GetUniqueId(), "La grande cavalcata", 1960, "Avventura", 200, "S002", lAutoriLibro);
+
+            //List<Autore> lAutoriLibro2 = new List<Autore>();
+            //Autore AutoreMioLibro3 = new Autore("Gianni", "Rivera", "gianni@gmail.com");
+            //lAutoriLibro2.Add(AutoreMioLibro3);
+            //b.AggiungiLibro(db.GetUniqueId(), "La grande cavalcata - PARTE 2", 1965, "Avventura", 200, "S002", lAutoriLibro);
 
 
 
